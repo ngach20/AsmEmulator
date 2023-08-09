@@ -1,10 +1,15 @@
 #include "reader.h"
+#include <iostream>
 
 Reader::Reader(const char* filename){
     std::fstream myFile;
 
     myFile.open(filename, std::ios_base::in);
     
+    if(!myFile.is_open()){
+        std::cerr << "Incorrect file path" << std::endl;
+        exit(-1);
+    }
 
     this->lines_head = NULL;
 
@@ -21,6 +26,7 @@ Reader::Reader(const char* filename){
 
 
     this->cur_line = this->lines_head;
+    myFile.close();
 }
 
 std::string Reader::next_line(){

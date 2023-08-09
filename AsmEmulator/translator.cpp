@@ -1,4 +1,5 @@
 #include "translator.h"
+#include <iomanip>
 
 
 void Translator::init_special_registers(){
@@ -255,6 +256,12 @@ void Translator::translate_define(Reader& reader, Instructions& program_memory, 
 
     while(reader.has_next()){
         std::string cur_instr = reader.next_line();
+
+        // for(int i = 0; i < cur_instr.length(); i++){
+        //     std::cout << std::hex << (int)cur_instr[i] << " ";
+        // }
+
+        // std::cout << std::endl;
 
         if(cur_instr == "RET"){
             program_memory.add_instruction(RET, true);

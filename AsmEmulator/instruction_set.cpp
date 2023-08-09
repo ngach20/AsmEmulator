@@ -18,6 +18,7 @@ void Instructions::add_instruction(unsigned long long int instruction, bool defi
 
     cur_ptr = defined ? &this->cur_define : &this->cur_instruction;
 
+
     **(unsigned long long int**)cur_ptr = instruction;
     *cur_ptr += sizeof(unsigned long long int);
 }

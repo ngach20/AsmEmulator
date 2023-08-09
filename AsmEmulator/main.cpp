@@ -10,6 +10,8 @@ int main(int argc, char** argv){
 
     static char* filename = argv[1];
 
+    std::cout << filename << std::endl;
+
     Reader reader = Reader(filename);
 
     Instructions instructions = Instructions();
@@ -18,12 +20,11 @@ int main(int argc, char** argv){
 
     Translator::translate(reader, instructions);
 
-      std::cout << "Finished translating!" << std::endl;
+    std::cout << "Finished translating!" << std::endl;
 
     std::cout << "Executing!" << std::endl;
 
-    VM vm;
-    vm.insert_program(instructions);
+    VM vm = VM(instructions);
     vm.run();
 
     std::cout << "Finished executing!" << std::endl;

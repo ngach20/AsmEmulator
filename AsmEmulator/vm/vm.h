@@ -6,7 +6,7 @@
 
 class VM{
     public:
-        VM();
+        VM(Instructions& instr);
 
         void run();
 
@@ -18,15 +18,15 @@ class VM{
         std::unordered_map<int, void(*)(VM*, const long long int)> instr_to_func;
         void init_instr_to_func();
 
-        Instructions program;
+        Instructions& program;
 
         Memory ram;
 
         short regs[128]; //Registers
 
-        short* pc  = &regs[PC];   //Program Counter
-        short* sp  = &regs[SP];   //Stack Pointer
-        short* rv  = &regs[RV];   //Return Value
+        short* pc; //Program Counter
+        short* sp; //Stack Pointer
+        short* rv; //Return Value
 
         bool jumped;
 

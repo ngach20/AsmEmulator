@@ -2,10 +2,15 @@
 #include <iostream>
 #include <iomanip>
 
-VM::VM(){
+VM::VM(Instructions& instr) : program(instr){
     init_instr_to_func();
     this->jumped = false;
-    memset(this->regs, 0, sizeof(char) * 128);
+    memset(this->regs, 0, sizeof(short) * 128);
+
+    pc = &(this->regs[PC]);
+    sp = &(this->regs[SP]);
+    rv = &(this->regs[RV]);
+    
     *this->sp = MEMORY_SIZE - 2;
 }
 
@@ -42,7 +47,9 @@ void VM::insert_program(Instructions& program){
 }
 
 void VM::run(){
-    long long int instruction = this->program.get_instruction(*pc);
+    long long int instruction = this->program.get_instruction(*(this->pc));
+
+    std::cout << "Instruction: " << instruction << std::endl;
 
     while(instruction != 0){
         instr_to_func[(int)*(unsigned char*)&instruction](this, instruction);
