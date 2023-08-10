@@ -53,7 +53,7 @@ struct jump{
 
 struct call{
     char instr;
-    char func_idx;
+    unsigned short func_addr;
 };
 
 struct branch{

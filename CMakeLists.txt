@@ -7,7 +7,6 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(interpreter AsmEmulator/main.cpp
                            AsmEmulator/defines.h 
                            AsmEmulator/instruction_set.h 
-                           AsmEmulator/interpreter.exe 
                            AsmEmulator/reader.cpp 
                            AsmEmulator/translator.h 
                            AsmEmulator/instruction_set.cpp 

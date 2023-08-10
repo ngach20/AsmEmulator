@@ -29,6 +29,11 @@ char Instructions::add_function_define(){
     return this->cur_function_number++;
 }
 
+unsigned short Instructions::get_function_pc(int func_idx){
+    char* func_ptr = this->function_address_map[func_idx];
+
+    return PROGRAM_SIZE/2 + (func_ptr - this->defines);
+}
 
 long long int Instructions::get_instruction(unsigned short pc){
     if(pc >= PROGRAM_SIZE){
@@ -43,11 +48,6 @@ long long int Instructions::get_instruction(unsigned short pc){
     }
 }
 
-unsigned short Instructions::get_function_pc(int func_idx){
-    char* func_ptr = this->function_address_map[func_idx];
-
-    return PROGRAM_SIZE/2 + (func_ptr - this->defines);
-}
 
 Instructions::~Instructions(){
     free(this->instructions);

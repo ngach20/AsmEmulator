@@ -26,5 +26,6 @@
 #define RV  127
 #define SP  126
 #define PC  125
+#define JM  124
 
 #endif

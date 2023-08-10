@@ -5,6 +5,9 @@
 #include <iostream>
 #include <string.h>
 
+#ifndef TRANSLATOR_DEF
+#define TRANSLATOR_DEF
+
 /* 
     Translates given assembly code into readable instructions for our custom vm.
 */
@@ -13,6 +16,7 @@ namespace Translator{
     static std::unordered_map<std::string, int> branch_types;
     static std::unordered_map<std::string, long long int(*)(std::string)> functions;
     static std::unordered_map<std::string, char> defines;
+    static std::unordered_map<char, unsigned short> function_pc_map;
 
     void init_special_registers();
     void init_branch_types();
@@ -44,3 +48,5 @@ namespace Translator{
     unsigned char get_reg_idx(std::string reg);
 
 };
+
+#endif

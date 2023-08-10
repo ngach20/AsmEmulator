@@ -1,5 +1,8 @@
 #include "../defines.h"
 
+#ifndef MEMORY_DEF
+#define MEMORY_DEF
+
 class Memory{
     public:
         Memory();
@@ -9,3 +12,5 @@ class Memory{
     private:
         char mem[MEMORY_SIZE];
 };
+
+#endif

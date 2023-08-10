@@ -16,9 +16,10 @@ class Instructions{
         //Returns function number
         char add_function_define();
 
-        long long int get_instruction(unsigned short pc);
-
+        //Returns function address
         unsigned short get_function_pc(int func_idx);
+        
+        long long int get_instruction(unsigned short pc);
 
         ~Instructions();
 

@@ -38,7 +38,7 @@ void Translator::init_func_pointers(){
 void Translator::translate(Reader& reader, Instructions& program_memory){
     init_special_registers();
     init_branch_types();
-    init_func_pointers();   
+    init_func_pointers();
 
     while(reader.has_next()){
         std::string cur_instr = reader.next_line();
@@ -212,7 +212,7 @@ long long int Translator::translate_call(std::string instr){
 
     call* operation = (call*)&res;
     operation->instr = CALL;
-    operation->func_idx = func_idx;
+    operation->func_addr = function_pc_map[func_idx];
 
     return res;
 }
@@ -253,15 +253,10 @@ long long int Translator::translate_branch(std::string instr){
 void Translator::translate_define(Reader& reader, Instructions& program_memory, std::string func_name){
     char fun_idx = program_memory.add_function_define();
     defines[func_name] = fun_idx;
+    function_pc_map[fun_idx] = program_memory.get_function_pc(fun_idx);
 
     while(reader.has_next()){
         std::string cur_instr = reader.next_line();
-
-        // for(int i = 0; i < cur_instr.length(); i++){
-        //     std::cout << std::hex << (int)cur_instr[i] << " ";
-        // }
-
-        // std::cout << std::endl;
 
         if(cur_instr == "RET"){
             program_memory.add_instruction(RET, true);

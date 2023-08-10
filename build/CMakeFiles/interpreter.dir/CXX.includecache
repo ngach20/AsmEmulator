@@ -22,6 +22,14 @@ unordered_map
 
 /home/nick/AsmEmulator/AsmEmulator/instruction_types.h
 
+/home/nick/AsmEmulator/AsmEmulator/vm/cpu.h
+memory.h
+/home/nick/AsmEmulator/AsmEmulator/vm/memory.h
+../instruction_types.h
+/home/nick/AsmEmulator/AsmEmulator/instruction_types.h
+unordered_map
+-
+
 /home/nick/AsmEmulator/AsmEmulator/vm/memory.h
 ../defines.h
 /home/nick/AsmEmulator/AsmEmulator/defines.h
@@ -37,6 +45,8 @@ iomanip
 /home/nick/AsmEmulator/AsmEmulator/vm/vm.h
 memory.h
 /home/nick/AsmEmulator/AsmEmulator/vm/memory.h
+cpu.h
+/home/nick/AsmEmulator/AsmEmulator/vm/cpu.h
 ../instruction_set.h
 /home/nick/AsmEmulator/AsmEmulator/instruction_set.h
 ../instruction_types.h
