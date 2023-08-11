@@ -5,6 +5,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/interpreter.dir/AsmEmulator/translator.cpp.o"
   "CMakeFiles/interpreter.dir/AsmEmulator/vm/cpu.cpp.o"
   "CMakeFiles/interpreter.dir/AsmEmulator/vm/memory.cpp.o"
+  "CMakeFiles/interpreter.dir/AsmEmulator/vm/screen.cpp.o"
   "CMakeFiles/interpreter.dir/AsmEmulator/vm/vm.cpp.o"
   "interpreter"
   "interpreter.pdb"

@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/nick/AsmEmulator/AsmEmulator/translator.cpp" "/home/nick/AsmEmulator/build/CMakeFiles/interpreter.dir/AsmEmulator/translator.cpp.o"
   "/home/nick/AsmEmulator/AsmEmulator/vm/cpu.cpp" "/home/nick/AsmEmulator/build/CMakeFiles/interpreter.dir/AsmEmulator/vm/cpu.cpp.o"
   "/home/nick/AsmEmulator/AsmEmulator/vm/memory.cpp" "/home/nick/AsmEmulator/build/CMakeFiles/interpreter.dir/AsmEmulator/vm/memory.cpp.o"
+  "/home/nick/AsmEmulator/AsmEmulator/vm/screen.cpp" "/home/nick/AsmEmulator/build/CMakeFiles/interpreter.dir/AsmEmulator/vm/screen.cpp.o"
   "/home/nick/AsmEmulator/AsmEmulator/vm/vm.cpp" "/home/nick/AsmEmulator/build/CMakeFiles/interpreter.dir/AsmEmulator/vm/vm.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

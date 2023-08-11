@@ -14,6 +14,7 @@ CMakeFiles/interpreter.dir/AsmEmulator/main.cpp.o
  /home/nick/AsmEmulator/AsmEmulator/translator.h
  /home/nick/AsmEmulator/AsmEmulator/vm/cpu.h
  /home/nick/AsmEmulator/AsmEmulator/vm/memory.h
+ /home/nick/AsmEmulator/AsmEmulator/vm/screen.h
  /home/nick/AsmEmulator/AsmEmulator/vm/vm.h
 CMakeFiles/interpreter.dir/AsmEmulator/reader.cpp.o
  /home/nick/AsmEmulator/AsmEmulator/reader.cpp
@@ -35,11 +36,17 @@ CMakeFiles/interpreter.dir/AsmEmulator/vm/memory.cpp.o
  /home/nick/AsmEmulator/AsmEmulator/defines.h
  /home/nick/AsmEmulator/AsmEmulator/vm/memory.cpp
  /home/nick/AsmEmulator/AsmEmulator/vm/memory.h
+CMakeFiles/interpreter.dir/AsmEmulator/vm/screen.cpp.o
+ /home/nick/AsmEmulator/AsmEmulator/defines.h
+ /home/nick/AsmEmulator/AsmEmulator/vm/memory.h
+ /home/nick/AsmEmulator/AsmEmulator/vm/screen.cpp
+ /home/nick/AsmEmulator/AsmEmulator/vm/screen.h
 CMakeFiles/interpreter.dir/AsmEmulator/vm/vm.cpp.o
  /home/nick/AsmEmulator/AsmEmulator/defines.h
  /home/nick/AsmEmulator/AsmEmulator/instruction_set.h
  /home/nick/AsmEmulator/AsmEmulator/instruction_types.h
  /home/nick/AsmEmulator/AsmEmulator/vm/cpu.h
  /home/nick/AsmEmulator/AsmEmulator/vm/memory.h
+ /home/nick/AsmEmulator/AsmEmulator/vm/screen.h
  /home/nick/AsmEmulator/AsmEmulator/vm/vm.cpp
  /home/nick/AsmEmulator/AsmEmulator/vm/vm.h

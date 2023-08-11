@@ -285,6 +285,33 @@ AsmEmulator/vm/memory.cpp.s:
 	$(MAKE) -f CMakeFiles/interpreter.dir/build.make CMakeFiles/interpreter.dir/AsmEmulator/vm/memory.cpp.s
 .PHONY : AsmEmulator/vm/memory.cpp.s
 
+AsmEmulator/vm/screen.o: AsmEmulator/vm/screen.cpp.o
+
+.PHONY : AsmEmulator/vm/screen.o
+
+# target to build an object file
+AsmEmulator/vm/screen.cpp.o:
+	$(MAKE) -f CMakeFiles/interpreter.dir/build.make CMakeFiles/interpreter.dir/AsmEmulator/vm/screen.cpp.o
+.PHONY : AsmEmulator/vm/screen.cpp.o
+
+AsmEmulator/vm/screen.i: AsmEmulator/vm/screen.cpp.i
+
+.PHONY : AsmEmulator/vm/screen.i
+
+# target to preprocess a source file
+AsmEmulator/vm/screen.cpp.i:
+	$(MAKE) -f CMakeFiles/interpreter.dir/build.make CMakeFiles/interpreter.dir/AsmEmulator/vm/screen.cpp.i
+.PHONY : AsmEmulator/vm/screen.cpp.i
+
+AsmEmulator/vm/screen.s: AsmEmulator/vm/screen.cpp.s
+
+.PHONY : AsmEmulator/vm/screen.s
+
+# target to generate assembly for a file
+AsmEmulator/vm/screen.cpp.s:
+	$(MAKE) -f CMakeFiles/interpreter.dir/build.make CMakeFiles/interpreter.dir/AsmEmulator/vm/screen.cpp.s
+.PHONY : AsmEmulator/vm/screen.cpp.s
+
 AsmEmulator/vm/vm.o: AsmEmulator/vm/vm.cpp.o
 
 .PHONY : AsmEmulator/vm/vm.o
@@ -339,6 +366,9 @@ help:
 	@echo "... AsmEmulator/vm/memory.o"
 	@echo "... AsmEmulator/vm/memory.i"
 	@echo "... AsmEmulator/vm/memory.s"
+	@echo "... AsmEmulator/vm/screen.o"
+	@echo "... AsmEmulator/vm/screen.i"
+	@echo "... AsmEmulator/vm/screen.s"
 	@echo "... AsmEmulator/vm/vm.o"
 	@echo "... AsmEmulator/vm/vm.i"
 	@echo "... AsmEmulator/vm/vm.s"

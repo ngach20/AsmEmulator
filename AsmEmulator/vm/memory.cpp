@@ -9,7 +9,7 @@ Memory::Memory(){
 void Memory::store(short val, unsigned short addr){
     if(addr % 2 != 0 || addr >= MEMORY_SIZE){
         std::cerr << "Invalid memory location" << std::endl;
-        return;
+        exit(-1);
     }
 
     ((short*)this->mem)[addr/2] = val;
@@ -17,8 +17,8 @@ void Memory::store(short val, unsigned short addr){
 
 short Memory::load(unsigned short addr){
      if(addr % 2 != 0 || addr >= MEMORY_SIZE){
-        std::cerr << "Invalid memory location" << std::endl;
-        return 0;
+        std::cout << "Invalid memory location" << std::endl;
+        exit(-1);
     }
 
     return ((short*)this->mem)[addr/2];

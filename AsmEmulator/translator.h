@@ -45,8 +45,7 @@ namespace Translator{
 
     bool is_digit(char c);
 
-    unsigned char get_reg_idx(std::string reg);
-
+    char get_reg_idx(std::string reg);
 };
 
 #endif

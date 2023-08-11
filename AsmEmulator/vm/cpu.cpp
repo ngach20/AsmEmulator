@@ -3,7 +3,6 @@
 
 CPU::CPU(Memory& memory) : ram(memory){
     init_instr_to_func();
-    //this->jumped = false;
     memset(this->regs, 0, sizeof(short) * 128);
 
     pc = &(this->regs[PC]);

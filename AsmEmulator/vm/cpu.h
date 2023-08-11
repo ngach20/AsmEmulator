@@ -1,6 +1,7 @@
 #include "memory.h"
 #include "../instruction_types.h"
 #include <unordered_map>
+#include <iostream>
 
 class CPU{
     public:
@@ -25,8 +26,6 @@ class CPU{
         short* rv; //Return Value
         short* jm; //Jumped value
 
-        //bool jumped;
-
         static void execute_alu(CPU* cpu, const long long int instruction){
             //std::cout << "executing alu" << std::endl;
             alu operation = *(alu*)&instruction;
@@ -43,6 +42,9 @@ class CPU{
             //std::cout << "executing alu_const" << std::endl;
             alu_const operation = *(alu_const*)&instruction;
 
+            // std::cout << "Dest reg: " << (int)operation.dest_reg << std::endl;
+            // std::cout << "Reg: " << (int)operation.reg << std::endl;
+
             short res = 0;
             short reg_val = cpu->regs[operation.reg];
 
@@ -53,6 +55,7 @@ class CPU{
             }
 
             cpu->regs[operation.dest_reg] = res;
+            // std::cout << "val: " << cpu->regs[operation.dest_reg] << std::endl;
         }
 
         static short alu_func(short val1, short val2, char op){
@@ -89,14 +92,14 @@ class CPU{
             //std::cout << "executing load_mem" << std::endl;
             load_memory operation = *(load_memory*)&instruction;
 
-            short addr = cpu->regs[operation.addr_reg] + operation.offset;
+            unsigned short addr = cpu->regs[operation.addr_reg] + operation.offset;
             cpu->regs[operation.dest_reg] = cpu->ram.load(addr);
         }
 
         static void execute_store_reg(CPU* cpu, const long long int instruction){
             //std::cout << "executing store_reg" << std::endl;
             store_register operation = *(store_register*)&instruction;
-            short addr = cpu->regs[operation.addr_reg] + operation.offset;
+            unsigned short addr = cpu->regs[operation.addr_reg] + operation.offset;
             short val = cpu->regs[operation.source_reg];
             cpu->ram.store(val, addr);
         }
@@ -105,7 +108,7 @@ class CPU{
             //std::cout << "executing store_const" << std::endl;
             store_const operation = *(store_const*)&instruction;
 
-            short addr = cpu->regs[operation.addr_reg] + operation.offset;
+            unsigned short addr = cpu->regs[operation.addr_reg] + operation.offset;
             cpu->ram.store(operation.constant, addr);
         }
 
@@ -113,7 +116,7 @@ class CPU{
             //std::cout << "executing execute_jump" << std::endl;
             jump operation = *(jump*)&instruction;
 
-            short addr = cpu->regs[operation.addr_reg] + operation.offset;
+            unsigned short addr = cpu->regs[operation.addr_reg] + operation.offset;
             *cpu->pc = addr;
             *cpu->jm = 1;
         }

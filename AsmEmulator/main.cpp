@@ -10,33 +10,40 @@ int main(int argc, char** argv){
 
     static char* filename = argv[1];
 
-    std::cout << filename << std::endl;
 
     Reader reader = Reader(filename);
 
     Instructions instructions = Instructions();
 
-    std::cout << "Translating!" << std::endl;
+    std::cout << "Translating " << filename << std::endl;
 
     Translator::translate(reader, instructions);
 
     std::cout << "Finished translating!" << std::endl;
 
-    std::cout << "Executing!" << std::endl;
+    std::cout << "Executing" << std::endl;
 
     VM vm = VM(instructions);
     vm.run();
 
-    std::cout << "Finished executing!" << std::endl;
+    std::cout << "Finished executing" << std::endl;
 
     std::cout << "Please input the number of memory addresses you wish to see: ";
     
+    std::string num_lines_str = "";
     unsigned short num_lines = 0;
-    std::cin >> num_lines;
-    std::cout << '\n';
-
-    vm.print_stack(num_lines);
-
+    std::getline(std::cin, num_lines_str);
     std::cout << std::endl;
+    
+    if(!num_lines_str.empty()){
+        try{
+            num_lines = std::stoi(num_lines_str);
+            vm.print_stack(num_lines);
+        }catch(const std::exception& e){
+            std::cout << "Invalid argument" << std::endl;
+            exit(-1);
+        }
+    }
+
     return 0;
 }

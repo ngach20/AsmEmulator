@@ -13,6 +13,7 @@ CMakeFiles/interpreter.dir/AsmEmulator/main.cpp.o: ../AsmEmulator/reader.h
 CMakeFiles/interpreter.dir/AsmEmulator/main.cpp.o: ../AsmEmulator/translator.h
 CMakeFiles/interpreter.dir/AsmEmulator/main.cpp.o: ../AsmEmulator/vm/cpu.h
 CMakeFiles/interpreter.dir/AsmEmulator/main.cpp.o: ../AsmEmulator/vm/memory.h
+CMakeFiles/interpreter.dir/AsmEmulator/main.cpp.o: ../AsmEmulator/vm/screen.h
 CMakeFiles/interpreter.dir/AsmEmulator/main.cpp.o: ../AsmEmulator/vm/vm.h
 
 CMakeFiles/interpreter.dir/AsmEmulator/reader.cpp.o: ../AsmEmulator/reader.cpp
@@ -35,11 +36,17 @@ CMakeFiles/interpreter.dir/AsmEmulator/vm/memory.cpp.o: ../AsmEmulator/defines.h
 CMakeFiles/interpreter.dir/AsmEmulator/vm/memory.cpp.o: ../AsmEmulator/vm/memory.cpp
 CMakeFiles/interpreter.dir/AsmEmulator/vm/memory.cpp.o: ../AsmEmulator/vm/memory.h
 
+CMakeFiles/interpreter.dir/AsmEmulator/vm/screen.cpp.o: ../AsmEmulator/defines.h
+CMakeFiles/interpreter.dir/AsmEmulator/vm/screen.cpp.o: ../AsmEmulator/vm/memory.h
+CMakeFiles/interpreter.dir/AsmEmulator/vm/screen.cpp.o: ../AsmEmulator/vm/screen.cpp
+CMakeFiles/interpreter.dir/AsmEmulator/vm/screen.cpp.o: ../AsmEmulator/vm/screen.h
+
 CMakeFiles/interpreter.dir/AsmEmulator/vm/vm.cpp.o: ../AsmEmulator/defines.h
 CMakeFiles/interpreter.dir/AsmEmulator/vm/vm.cpp.o: ../AsmEmulator/instruction_set.h
 CMakeFiles/interpreter.dir/AsmEmulator/vm/vm.cpp.o: ../AsmEmulator/instruction_types.h
 CMakeFiles/interpreter.dir/AsmEmulator/vm/vm.cpp.o: ../AsmEmulator/vm/cpu.h
 CMakeFiles/interpreter.dir/AsmEmulator/vm/vm.cpp.o: ../AsmEmulator/vm/memory.h
+CMakeFiles/interpreter.dir/AsmEmulator/vm/vm.cpp.o: ../AsmEmulator/vm/screen.h
 CMakeFiles/interpreter.dir/AsmEmulator/vm/vm.cpp.o: ../AsmEmulator/vm/vm.cpp
 CMakeFiles/interpreter.dir/AsmEmulator/vm/vm.cpp.o: ../AsmEmulator/vm/vm.h
 

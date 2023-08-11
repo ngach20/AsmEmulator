@@ -28,4 +28,9 @@
 #define PC  125
 #define JM  124
 
+//Screen
+#define SCREEN_WIDTH 64
+#define SCREEN_HEIGHT 16
+#define SCREEN_START 0
+
 #endif

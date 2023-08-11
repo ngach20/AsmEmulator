@@ -2,7 +2,7 @@
 #include <iostream>
 #include <iomanip>
 
-VM::VM(Instructions& instr) : program(instr), cpu(this->ram){
+VM::VM(Instructions& instr) : program(instr), cpu(this->ram), screen(this->ram){
 }
 
 void VM::print_stack(short num_lines){
@@ -25,4 +25,11 @@ void VM::run(){
 
         instruction = this->program.get_instruction(this->cpu.get_regs()[PC]);
     }
+
+
+    this->screen.update_display();
+    this->screen.remove_display();
+    // for(int i = SCREEN_START; i < 6; i+=2){
+    //     std::cout << "Addr: " << i << " Value: " << this->ram.load(i) << std::endl;
+    // }
 }

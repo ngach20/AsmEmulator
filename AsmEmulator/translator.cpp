@@ -80,7 +80,7 @@ long long int Translator::translate_alu(std::string instr){
         operation->op = instr.at(instr.size() - 3);
     }else{
         // e.g.: R1=R2*R3
-        if(instr.size() == 8){
+        if(instr.size() == 8 && get_reg_idx(instr.substr(3, 2)) != -1 && get_reg_idx(instr.substr(6, 2)) != -1){
             char dest_reg_idx = get_reg_idx(instr.substr(0, 2));
             char reg1 = get_reg_idx(instr.substr(3, 2));
             char reg2 = get_reg_idx(instr.substr(6, 2));
@@ -91,30 +91,32 @@ long long int Translator::translate_alu(std::string instr){
             operation->reg1 = reg1;
             operation->reg2 = reg2;
             operation->op = instr.at(5);
-        }else if(instr.size() == 7){ //e.g.: R1=R2*2
-            char dest_reg_idx = get_reg_idx(instr.substr(0, 2));
-            int constant = std::stoi(instr.substr(6));
+        }else if(get_reg_idx(instr.substr(3, 2)) != -1){ //e.g.: R1=R2
+            if(instr.size() == 5){
+                char dest_reg_idx = get_reg_idx(instr.substr(0, 2));
+                char reg = get_reg_idx(instr.substr(eq_idx + 1, 2));
 
-            char reg = get_reg_idx(instr.substr(eq_idx + 1, 2));
+                alu_const* operation = (alu_const*)&res;
+                operation->instr = HI_BIT | ALU;
+                operation->constant = 0;
+                operation->left_const = 0;
+                operation->dest_reg = dest_reg_idx;
+                operation->reg = reg;
+                operation->op = '+';
+            }else{ //e.g.: R1=R2*2
+                char dest_reg_idx = get_reg_idx(instr.substr(0, 2));
+                int constant = std::stoi(instr.substr(6));
 
-            alu_const* operation = (alu_const*)&res;
-            operation->instr = HI_BIT | ALU;
-            operation->constant = (short)constant;
-            operation->left_const = 0;
-            operation->dest_reg = dest_reg_idx;
-            operation->reg = reg;
-            operation->op = instr.at(instr.size() - 2);
-        }else if(instr.size() == 5){
-            char dest_reg_idx = get_reg_idx(instr.substr(0, 2));
-            char reg = get_reg_idx(instr.substr(eq_idx + 1, 2));
+                char reg = get_reg_idx(instr.substr(eq_idx + 1, 2));
 
-            alu_const* operation = (alu_const*)&res;
-            operation->instr = HI_BIT | ALU;
-            operation->constant = 0;
-            operation->left_const = 0;
-            operation->dest_reg = dest_reg_idx;
-            operation->reg = reg;
-            operation->op = '+';
+                alu_const* operation = (alu_const*)&res;
+                operation->instr = HI_BIT | ALU;
+                operation->constant = (short)constant;
+                operation->left_const = 0;
+                operation->dest_reg = dest_reg_idx;
+                operation->reg = reg;
+                operation->op = instr.at(5);
+            }
         }
     }
 
@@ -278,11 +280,17 @@ bool Translator::is_digit(char c){
     return ((c - '0') >= 0 && (c - '0') <= 9);
 }
 
-unsigned char Translator::get_reg_idx(std::string reg){
-    if(is_digit(reg.at(1))){ //R* register where * is some digit
+char Translator::get_reg_idx(std::string reg){
+    if(reg.size() != 2){
+        return -1;
+    }
+
+    if(reg.at(0) == 'R' && is_digit(reg.at(1))){ //R* register where * is some digit
         const char dig = reg.at(1);
         return dig - '0';
-    }else{
+    }else if(special_registers.find(reg) != special_registers.end()){
         return special_registers[reg];
+    }else{
+        return -1;
     }
 }

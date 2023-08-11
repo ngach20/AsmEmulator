@@ -1,5 +1,6 @@
 #include "memory.h"
 #include "cpu.h"
+#include "screen.h"
 #include "../instruction_set.h"
 #include "../instruction_types.h"
 #include "../defines.h"
@@ -20,6 +21,7 @@ class VM{
 
         Memory ram;
         CPU cpu;
+        Screen screen;
 
         void execute(long long int instruction);
 };
