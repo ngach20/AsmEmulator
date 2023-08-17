@@ -2,12 +2,19 @@
 #include "memory.h"
 #include "../defines.h"
 
-class Screen{
+class IO{
     public:
-        Screen(Memory& memory);
+        IO(Memory& memory);
 
+        /*
+            Reads the output buffer and displays the contents to the screen.
+        */
         void update_display();
 
+        /*
+            Gets the input and redirects it to the input buffer.
+            Reads ESC for exit.
+        */
         void get_input(bool* program_on);
 
     private:
@@ -15,8 +22,6 @@ class Screen{
         WINDOW* border;
 
         Memory& ram;
-
-        void print_char(char c);
 
         bool should_exit;
 };

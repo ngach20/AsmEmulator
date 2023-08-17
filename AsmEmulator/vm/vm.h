@@ -21,7 +21,7 @@ class VM{
 
         Memory ram;
         CPU cpu;
-        Screen screen;
+        IO io;
 
         void execute(long long int instruction);
 };

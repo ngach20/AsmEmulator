@@ -28,12 +28,10 @@
 #define PC  125
 #define JM  124
 
-//Screen
+//IO
 #define SCREEN_WIDTH 64
 #define SCREEN_HEIGHT 16
-#define SCREEN_ADDR 0
-
-//Keyboard
-#define KBD 2
+#define OUT_ADDR 0
+#define IN_ADDR 2
 
 #endif

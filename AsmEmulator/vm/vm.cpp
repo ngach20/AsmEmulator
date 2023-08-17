@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <thread>
 
-VM::VM(Instructions& instr) : program(instr), cpu(this->ram), screen(this->ram){
+VM::VM(Instructions& instr) : program(instr), cpu(this->ram), io(this->ram){
 }
 
 void VM::print_stack(short num_lines){
@@ -23,15 +23,15 @@ void VM::run(){
 
     long long int instruction = this->program.get_instruction(this->cpu.get_regs()[PC]);
 
-    std::thread output_thread ([&] (Screen * scr) {
+    std::thread output_thread ([&] (IO * scr) {
             scr->update_display();
         }, 
-        &this->screen);
+        &this->io);
 
-    std::thread input_thread ([&] (Screen * scr) {
+    std::thread input_thread ([&] (IO * scr) {
             scr->get_input(&program_on);
         }, 
-        &this->screen);
+        &this->io);
 
     while(instruction != 0 && program_on){
         this->cpu.execute(instruction);
