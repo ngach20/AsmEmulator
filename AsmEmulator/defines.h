@@ -31,6 +31,9 @@
 //Screen
 #define SCREEN_WIDTH 64
 #define SCREEN_HEIGHT 16
-#define SCREEN_START 0
+#define SCREEN_ADDR 0
+
+//Keyboard
+#define KBD 2
 
 #endif

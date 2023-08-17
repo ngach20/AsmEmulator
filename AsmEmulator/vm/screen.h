@@ -1,3 +1,4 @@
+#include <ncurses.h>
 #include "memory.h"
 #include "../defines.h"
 
@@ -7,10 +8,15 @@ class Screen{
 
         void update_display();
 
-        void remove_display();
+        void get_input(bool* program_on);
 
     private:
+        WINDOW* scr;
+        WINDOW* border;
+
         Memory& ram;
 
-        char display[SCREEN_HEIGHT][SCREEN_WIDTH];
+        void print_char(char c);
+
+        bool should_exit;
 };

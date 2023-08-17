@@ -1,6 +1,7 @@
 #include "vm.h"
 #include <iostream>
 #include <iomanip>
+#include <thread>
 
 VM::VM(Instructions& instr) : program(instr), cpu(this->ram), screen(this->ram){
 }
@@ -18,18 +19,26 @@ void VM::print_stack(short num_lines){
 }
 
 void VM::run(){
+    bool program_on = true;
+
     long long int instruction = this->program.get_instruction(this->cpu.get_regs()[PC]);
 
-    while(instruction != 0){
+    std::thread output_thread ([&] (Screen * scr) {
+            scr->update_display();
+        }, 
+        &this->screen);
+
+    std::thread input_thread ([&] (Screen * scr) {
+            scr->get_input(&program_on);
+        }, 
+        &this->screen);
+
+    while(instruction != 0 && program_on){
         this->cpu.execute(instruction);
 
         instruction = this->program.get_instruction(this->cpu.get_regs()[PC]);
     }
 
-
-    this->screen.update_display();
-    this->screen.remove_display();
-    // for(int i = SCREEN_START; i < 6; i+=2){
-    //     std::cout << "Addr: " << i << " Value: " << this->ram.load(i) << std::endl;
-    // }
+    output_thread.join();
+    input_thread.join();
 }

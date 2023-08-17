@@ -63,12 +63,36 @@ iostream
 /home/nick/AsmEmulator/AsmEmulator/vm/memory.h
 ../defines.h
 /home/nick/AsmEmulator/AsmEmulator/defines.h
+mutex
+-
+
+/home/nick/AsmEmulator/AsmEmulator/vm/screen.cpp
+screen.h
+/home/nick/AsmEmulator/AsmEmulator/vm/screen.h
+iostream
+-
+thread
+-
+chrono
+-
 
 /home/nick/AsmEmulator/AsmEmulator/vm/screen.h
+ncurses.h
+-
 memory.h
 /home/nick/AsmEmulator/AsmEmulator/vm/memory.h
 ../defines.h
 /home/nick/AsmEmulator/AsmEmulator/defines.h
+
+/home/nick/AsmEmulator/AsmEmulator/vm/vm.cpp
+vm.h
+/home/nick/AsmEmulator/AsmEmulator/vm/vm.h
+iostream
+-
+iomanip
+-
+thread
+-
 
 /home/nick/AsmEmulator/AsmEmulator/vm/vm.h
 memory.h
