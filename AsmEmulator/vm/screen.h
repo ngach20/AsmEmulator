@@ -1,4 +1,5 @@
 #include <ncurses.h>
+#include <mutex>
 #include "memory.h"
 #include "../defines.h"
 
@@ -20,8 +21,21 @@ class IO{
     private:
         WINDOW* scr;
         WINDOW* border;
+        
+        WINDOW* ram_scr;
+        WINDOW* ram_scr_bord;
+        int ram_view_scroll;
+
+        WINDOW* inp;
 
         Memory& ram;
 
         bool should_exit;
+
+        int focus;
+        int _focus;
+
+        void display_mem();
+
+        std::mutex screen_lock; 
 };

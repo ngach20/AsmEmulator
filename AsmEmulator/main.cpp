@@ -28,22 +28,22 @@ int main(int argc, char** argv){
 
     std::cout << "Finished executing" << std::endl;
 
-    std::cout << "Please input the number of memory addresses you wish to see: ";
+    // std::cout << "Please input the number of memory addresses you wish to see: ";
     
-    std::string num_lines_str = "";
-    unsigned short num_lines = 0;
-    std::getline(std::cin, num_lines_str);
-    std::cout << std::endl;
+    // std::string num_lines_str = "";
+    // unsigned short num_lines = 0;
+    // std::getline(std::cin, num_lines_str);
+    // std::cout << std::endl;
     
-    if(!num_lines_str.empty()){
-        try{
-            num_lines = std::stoi(num_lines_str);
-            vm.print_stack(num_lines);
-        }catch(const std::exception& e){
-            std::cout << "Invalid argument" << std::endl;
-            exit(-1);
-        }
-    }
+    // if(!num_lines_str.empty()){
+    //     try{
+    //         num_lines = std::stoi(num_lines_str);
+    //         vm.print_stack(num_lines);
+    //     }catch(const std::exception& e){
+    //         std::cout << "Invalid argument" << std::endl;
+    //         exit(-1);
+    //     }
+    // }
 
     return 0;
 }
