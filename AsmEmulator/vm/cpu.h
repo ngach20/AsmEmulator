@@ -21,10 +21,10 @@ class CPU{
 
         short regs[128]; //Registers
 
-        short* pc; //Program Counter
-        short* sp; //Stack Pointer
-        short* rv; //Return Value
-        short* jm; //Jumped value
+        short* pc = &(this->regs[PC]); //Program Counter 
+        short* sp = &(this->regs[SP]); //Stack Pointer   
+        short* rv = &(this->regs[RV]);  //Return Value   
+        short* jm = &(this->regs[JM]);  //Jumped value   
 
         static void execute_alu(CPU* cpu, const long long int instruction){
             //std::cout << "executing alu" << std::endl;

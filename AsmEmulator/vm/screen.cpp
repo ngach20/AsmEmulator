@@ -49,8 +49,7 @@ void IO::update_display(){
                 char c = this->ram.load(OUT_ADDR);
 
                 if(c != 0){
-                    //Different terminals use different backspace codes?
-                    if(c == '\b' || c == KEY_BACKSPACE || c == 127){
+                    if(c == 127){
                         if(getcurx(this->scr) == 0){
                             if(getcury(this->scr) != 0){
                                 wmove(this->scr, getcury(this->scr) - 1, SCREEN_WIDTH - 1);
