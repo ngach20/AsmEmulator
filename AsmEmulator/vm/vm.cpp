@@ -2,6 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include <thread>
+#include <atomic>
 
 VM::VM(Instructions& instr) : program(instr), cpu(this->ram), io(this->ram){
 }
@@ -19,7 +20,7 @@ void VM::print_stack(short num_lines){
 }
 
 void VM::run(){
-    bool program_on = true;
+    std::atomic_bool program_on(true);
 
     long long int instruction = this->program.get_instruction(this->cpu.get_regs()[PC]);
 
@@ -33,7 +34,7 @@ void VM::run(){
         }, 
         &this->io);
 
-    while(instruction != 0 && program_on){
+    while(instruction != 0 && program_on.load(std::memory_order_relaxed) == true){
         this->cpu.execute(instruction);
 
         instruction = this->program.get_instruction(this->cpu.get_regs()[PC]);

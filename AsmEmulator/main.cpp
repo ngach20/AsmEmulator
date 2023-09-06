@@ -23,7 +23,7 @@ int main(int argc, char** argv){
 
     std::cout << "Executing" << std::endl;
 
-    VM vm = VM(instructions);
+    VM vm(instructions);
     vm.run();
 
     std::cout << "Finished executing" << std::endl;

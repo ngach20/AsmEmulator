@@ -1,5 +1,6 @@
 #include <ncurses.h>
 #include <mutex>
+#include <atomic>
 #include "memory.h"
 #include "../defines.h"
 
@@ -16,7 +17,7 @@ class IO{
             Gets the input and redirects it to the input buffer.
             Reads ESC for exit.
         */
-        void get_input(bool* program_on);
+        void get_input(std::atomic_bool* program_on);
 
     private:
         WINDOW* scr;
@@ -24,18 +25,16 @@ class IO{
         
         WINDOW* ram_scr;
         WINDOW* ram_scr_bord;
-        int ram_view_scroll;
 
         WINDOW* inp;
 
         Memory& ram;
 
-        bool should_exit;
+        //Shared resources
+        std::atomic_bool should_exit;
+        std::atomic_int focus;
+        std::atomic_int _focus;
+        std::atomic_int ram_view_scroll;
 
-        int focus;
-        int _focus;
-
-        void display_mem();
-
-        std::mutex screen_lock; 
+        void display_mem(); 
 };

@@ -40,12 +40,12 @@ IO::IO(Memory& memory) : ram(memory){
 }
 
 void IO::update_display(){
-    wmove(this->scr, 0, 0);
+    wmove(this->scr, 0, 0);  
     while(1){
-        if(this->focus == 0){
+        if(this->focus.load() == 0){
             wborder(this->border, '|', '|', '=', '=', '+', '+', '+', '+');
             wrefresh(this->border);
-            while(this->focus == 0){
+            while(this->focus.load() == 0){
                 char c = this->ram.load(OUT_ADDR);
 
                 if(c != 0){
@@ -60,32 +60,29 @@ void IO::update_display(){
                         }
 
                         wdelch(this->scr);
-                        //Sleep because I can't seem to fix buffering problems
-                        std::this_thread::sleep_for(std::chrono::milliseconds(10));
                     }else{
                         waddch(this->scr, c);
                     }
+                    wrefresh(this->scr);
 
                     //Reset output buffer
                     this->ram.store(0, OUT_ADDR);
 
-                    wrefresh(this->scr);
-
-                    display_mem();
                 }
-            }
-        }
-
-        if(this->focus == 1){
-            wborder(this->ram_scr_bord, '|', '|', '=', '=', '+', '+', '+', '+');
-            wrefresh(this->ram_scr_bord);
-            while(this->focus == 1){
                 display_mem();
             }
         }
 
-        while(focus == -1){
-            if(should_exit){
+        if(this->focus.load() == 1){
+            wborder(this->ram_scr_bord, '|', '|', '=', '=', '+', '+', '+', '+');
+            wrefresh(this->ram_scr_bord);
+            while(this->focus.load() == 1){
+                display_mem();
+            }
+        }
+
+        while(focus.load() == -1){
+            if(should_exit.load()){
                 delwin(this->scr);
                 delwin(this->border);
                 delwin(this->ram_scr);
@@ -94,7 +91,7 @@ void IO::update_display(){
                 return;
             }
 
-            if(this->_focus == 0){
+            if(this->_focus.load() == 0){
                 wborder(this->border, '#', '#', '#', '#', '#', '#', '#', '#');
                 wborder(this->ram_scr_bord, '|', '|', '=', '=', '+', '+', '+', '+');
             }else{
@@ -110,11 +107,11 @@ void IO::update_display(){
     }
 }
 
-void IO::get_input(bool* program_on){
+void IO::get_input(std::atomic_bool *program_on){
     int c;
     std::string num = "";
     while(1){
-        if(this->focus == 0){
+        if(this->focus.load() == 0){
             while(1){
                 c = wgetch(this->inp);
 
@@ -126,10 +123,14 @@ void IO::get_input(bool* program_on){
                     break;
                 }
                 else{
+                    //Sleep for some time if the buffer is not yet cleared
+                    if(this->ram.load(IN_ADDR) != 0){
+                        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                    }
                     this->ram.store(c, IN_ADDR);
                 }
             }
-        }else if(this->focus == 1){
+        }else if(this->focus.load() == 1){
             while(1){
                 c = wgetch(this->inp);
 
@@ -138,13 +139,13 @@ void IO::get_input(bool* program_on){
                     focus = -1;
                     break;
                 }else if(c == 'j'){
-                    if(this->ram_view_scroll > 0){
+                    if(this->ram_view_scroll.load() > 0){
                         this->ram_view_scroll -= 2;
                     }
 
                     num = "";
                 }else if(c == 'k'){
-                    if(this->ram_view_scroll < MEMORY_SIZE - SCREEN_HEIGHT * 2){
+                    if(this->ram_view_scroll.load() < MEMORY_SIZE - SCREEN_HEIGHT * 2){
                         this->ram_view_scroll += 2;
                     }
 
@@ -154,6 +155,7 @@ void IO::get_input(bool* program_on){
                 }else if(c == '\n'){
                     int addr = 0;
                     
+                    //Get the hex string and convert it into an integer
                     try{
                         addr = std::stoi(num, nullptr, 16);
                     }catch(std::exception e){
@@ -176,21 +178,21 @@ void IO::get_input(bool* program_on){
             break;
         }
         else if(c == 'j'){
-            _focus = (2 + (_focus - 1) % 2) % 2;
+            _focus = (2 + (_focus.load() - 1) % 2) % 2;
         }else if (c == 'k'){
-            _focus = (2 + (_focus + 1) % 2) % 2;
+            _focus = (2 + (_focus.load() + 1) % 2) % 2;
         }else if (c == '\n'){
-            this->focus = _focus;
+            this->focus = _focus.load();
         }
     }
 
     should_exit = true;
-    *program_on = false;
+    program_on->store(false);
 }
 
 void IO::display_mem(){
     wmove(this->ram_scr, 0, 0);
-    for(int i = ram_view_scroll; i < ram_view_scroll + SCREEN_HEIGHT * 2; i+=2){
+    for(int i = ram_view_scroll.load(); i < ram_view_scroll.load() + SCREEN_HEIGHT * 2; i+=2){
         wprintw(this->ram_scr, "0x%04X | 0x%04X", i, (unsigned short)this->ram.load(i));
     }
 
